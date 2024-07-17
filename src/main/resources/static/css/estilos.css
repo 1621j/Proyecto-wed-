@@ -1,0 +1,134 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 2, 2024, 1:07:24 PM
+    Author     : tutti
+*/
+
+body {
+    background-color: #FFFFFF; /* Blanco */
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #FFFFFF; /* Blanco */
+    padding: 20px;
+    text-align: center;
+}
+
+.nav {
+    background-color: #FFFFFF; /* Blanco */
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+    display: flex; 
+}
+
+.nav button {
+    background-color: #FFFFFF; /* Blanco */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.nav button:hover {
+    background-color: #F7F7F7; /* Gris claro */
+}
+
+.destacados {
+    background-color: #FFFFFF; /* Blanco */
+    padding: 20px;
+    text-align: center;
+}
+
+.destacados img {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #CCCCCC; /* Gris claro */
+    margin: 10px;
+}
+.categorias.damas h5, .categorias.caballeros h5, .categorias.accesorios h5{
+    text-align: center; 
+}
+
+.categoriasDamas, .categoriasCaballeros, .calzadoCaballeros, .calzadoDamas, .categoriasAccesorios{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; 
+}
+
+.card {
+    border: 1px solid cadetblue;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 18rem; 
+    text-align: center; 
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-body{
+    padding: 15px; 
+}
+
+.card-body h5{
+    margin: 10px 0;
+}
+
+.card-body .btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #0033cc;  /* Azul */
+    color: #ffffff; /* Blanco */
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.card-body .btn:hover {
+    background-color: #0033cc;  
+}
+
+.carousel-inner img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 50px;
+    margin: 50px;
+    max-height: 600px;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon{
+    background-color:  #000000;
+    border-radius: 50%;
+    padding: 10px;
+    
+}
+
+.carousel-indicators .active{
+    background-color: #CCCCCC;
+}
+
+footer {
+    background-color: #000000; /* Negro */
+    color: #FFFFFF; /* Blanco */
+    padding: 10px;
+    text-align: center;
+    clear: both;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    height: 40px;
+}
+
+.nav button a{
+  text-decoration: none; /* quita el subrayado */
+  color: inherit; /* hereda el color del padre (blanco en este caso) */
+}
