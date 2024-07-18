@@ -22,6 +22,8 @@ header {
     background-color: #FFFFFF; /* Blanco */
     padding: 10px;
     text-align: center;
+    justify-content: center;
+    display: flex; 
 }
 
 .nav button {
@@ -48,6 +50,71 @@ header {
     border: 1px solid #CCCCCC; /* Gris claro */
     margin: 10px;
 }
+.categorias.damas h5, .categorias.caballeros h5, .categorias.accesorios h5{
+    text-align: center; 
+}
+
+.categoriasDamas, .categoriasCaballeros, .calzadoCaballeros, .calzadoDamas, .categoriasAccesorios{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; 
+}
+
+.card {
+    border: 1px solid cadetblue;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 18rem; 
+    text-align: center; 
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-body{
+    padding: 15px; 
+}
+
+.card-body h5{
+    margin: 10px 0;
+}
+
+.card-body .btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #0033cc;  /* Azul */
+    color: #ffffff; /* Blanco */
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.card-body .btn:hover {
+    background-color: #0033cc;  
+}
+
+.carousel-inner img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 50px;
+    margin: 50px;
+    max-height: 600px;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon{
+    background-color:  #000000;
+    border-radius: 50%;
+    padding: 10px;
+    
+}
+
+.carousel-indicators .active{
+    background-color: #CCCCCC;
+}
 
 footer {
     background-color: #000000; /* Negro */
@@ -58,7 +125,7 @@ footer {
     left: 0;
     width: 100%;
     bottom: 0;
-    height: 20px;
+    height: 40px;
 }
 
 .nav button a{
