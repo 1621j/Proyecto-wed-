@@ -69,4 +69,7 @@ public class CSController {
         model.addAttribute("categoria", categoria);
         return "/categoria/modifica";
     }
+    
+    /* hola*/
+    /* como estan*/
 }
