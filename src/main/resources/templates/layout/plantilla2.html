@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <title>Charlie Shop</title>
+        <meta charset="UTF-8"/>
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+        <script src="/js/rutinas.js" type="text/javascript"></script>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    </head>
+
+    <body>
+        <header th:fragment="header" class="header">
+            <nav class="navbar navbar-expand-lg bg-secondary gb-light">
+                <img src="https://scontent.fsjo7-1.fna.fbcdn.net/v/t39.30808-1/347651816_629160339076828_4890727056702275841_n.jpg?stp=dst-jpg_p200x200&_nc_cat=106&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=duj0tKPG57gQ7kNvgGlffQ0&_nc_oc=Adi0sRneAtg2kVHfyN4XsgTzp5vd6qWqSIT_QYGY-d-VBySurdgsGmpNxJ4uPUX4RJI&_nc_ht=scontent.fsjo7-1.fna&oh=00_AYAjIQVDuxyV0cqF42m05_6rs-Iou42fg41OUyBHuAQSIA&oe=669FB99B" style="position:relative; left:70px;" height="60" alt="Generic placeholder image"/>
+                <div class="container  pl-3" >
+                    <a th:href="@{/}" class="navbar-brand mr-4">[[#{aplicacion.titulo}]]</a>
+                    <div class="media p-3">
+
+                    </div>
+                    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-2"><a class="nav-link text-black" th:href="@{/categoria/listado}">[[#{plantilla.damas}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link text-black" th:href="@{/producto/listado}">[[#{plantilla.caballeros}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link text-black" th:href="@{/producto/listado}">[[#{plantilla.calzado}]]</a></li>  
+                            <li class="nav-item px-2"><a class="nav-link text-black" th:href="@{/producto/listado}">[[#{plantilla.novedades}]]</a></li>  
+                            <li class="nav-item px-2"><a class="nav-link text-black" th:href="@{/producto/listado}">[[#{plantilla.perfumeria}]]</a></li>  
+                            <li class="nav-item px-2"><a class="nav-link text-black" th:href="@{/producto/listado}">[[#{plantilla.accesorios}]]</a></li>  
+                            <li class="nav-item px-2"><a class="nav-link text-black" th:href="@{/producto/listado}">[[#{plantilla.descuentos}]]</a></li>  
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" 
+                                   data-bs-toggle="dropdown" 
+                                   href="#" 
+                                   role="button" 
+                                   aria-expanded="false">[[#{plantilla.pruebas}]]</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item"  th:href="@{/pruebas/listado}">[[#{plantilla.asociaciones}]]</a></li>
+                                    <li><a class="dropdown-item"  th:href="@{/pruebas/listado2}">[[#{plantilla.consultas}]]</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/usuario/listado}">[[#{plantilla.usuarios}]]</a></li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">[[#{plantilla.idioma}]]</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item"  th:href="@{/(lang=es)}">ES</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/(lang=en)}">EN</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <section id="main-header" class="py-2 bg-success text-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1><i class="fas fa-cog"></i> [[#{plantilla.suTienda}]]</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </header>
+
+        <footer th:fragment="footer">
+            &copy; 2024 Charlie Shop
+        </footer>
+    </body>
+</html>
