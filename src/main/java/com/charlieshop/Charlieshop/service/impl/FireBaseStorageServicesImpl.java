@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.charlieshop.Charlieshop.service.impl;
 
-/**
- *
- * @author tutti
- */
 
 import com.google.auth.Credentials;
 import com.google.auth.ServiceAccountSigner;
@@ -17,7 +10,6 @@ import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.Storage.SignUrlOption;
 import com.google.cloud.storage.StorageOptions;
-import com.charlieshop.Charlieshop.service.FireBaseStorageService;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,9 +18,10 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import com.charlieshop.Charlieshop.service.FirebaseStorageService;
 
 @Service
-public class FireBaseStorageServicesImpl implements FireBaseStorageService {
+public class FireBaseStorageServicesImpl implements FirebaseStorageService {
     @Override
     public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, Long id) {
         try {
