@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<!--
-Esta es la primera pagina de este archivo HTML dinamica
--->
+<!-- Esta es la primera pagina html -->
+
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{layout/plantilla::head}">
-        <title>LifeTech Technologies</title>
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShopcito</title>
         <meta charset="UTF-8"/>
     </head>
+
     <body>
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">   
-                        <button 
+                        <button
+                            sec:authorize="hasRole('ROLE_ADMIN')"
                             type="button" 
                             class="btn btn-primary btn-block" 
                             data-bs-toggle="modal" 
@@ -80,14 +82,15 @@ Esta es la primera pagina de este archivo HTML dinamica
                                         <tr><th>#</th>
                                             <th>[[#{categoria.descripcion}]]</th>
                                             <th>[[#{categoria.activo}]]</th>
-                                            <th></th></tr>
+                                            <th sec:authorize="hasRole('ROLE_ADMIN')"></th></tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="categoria, contador : ${categorias}">
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${categoria.descripcion}]]</td>
                                             <td th:text="${categoria.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
+                                            <td sec:authorize="hasRole('ROLE_ADMIN')">
+                                                <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
                                                 <a th:href="@{/categoria/modificar/}+${categoria.idCategoria}"
@@ -188,5 +191,116 @@ Esta es la primera pagina de este archivo HTML dinamica
                 </div>
             </div>
         </section>
+
+        <!-- 6 Logos Marcas -->
+
+        <style>
+            .LogosMarcas{
+                height:150rem;
+                background: #F0F8FF;
+                margin-top: 10px;
+
+            }
+        </style>
+
+        <section th:fragment="LogosMarcas">
+            <div class="container">
+                <div class="row justify-content-center" style="margin-top: 70px">
+                    <div class="col-2">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/Perfumeria%2FChanelLogo1.png?alt=media&token=82eaa4e9-2b7c-4529-8720-606dc4598b06" class="rounded-circle" width="100px" height="100px">                  
+                    </div>
+                    <div class="col-2">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/Perfumeria%2FLacosteLogo.png?alt=media&token=94b38b84-41a4-4b2d-8d1d-62df1332289b" class="rounded-circle" width="100px" height="100px">                  
+                    </div>
+                    <div class="col-2">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/Perfumeria%2FCalvinKleinLogo.jpg?alt=media&token=0eab1789-ae7e-40fe-9c0f-60bfe86e9895" class="rounded-circle" width="100px" height="100px">                  
+                    </div>
+                </div>
+                <hr style="margin-top: 50px">
+            </div>
+        </section>
+        
+        
+        <section th:fragment="listadoProductos" id="productos" >
+            <div class="container">
+                <div class="row row-cols-2">
+                    <h2 clas="inline">Perfumes</h2>
+                    
+                </div>
+
+                <div class="row row-cols-5 justify-content-center" th:if="${productos != null and !productos.empty}">
+                    <div class="card m-1" th:each="p : ${productos}">
+                            <figure>
+                                <img th:src="${p.imagen}" 
+                                     class="card-img-top" 
+                                     height="200" alt="alt"/>
+                                <figcaption>
+                                    ₡[[${p.precio}]] ([[${p.cantidad}]])
+                                </figcaption>
+                            </figure>
+                            <form >
+                                <input type="hidden" name="idProducto" th:value="${p.idProducto}" />
+                                <input type="hidden" name="cantidad" th:value="${p.cantidad}" />
+                                <button class="btn btn-light" id="addCar" name="addCar" type="button" onclick="addCard(this.form)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </form>
+                            <div class="card-header">
+                                <h4>[[${p.descripcion}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>[[${p.nombre}]]</p>
+                            </div>
+                    </div>
+                </div>
+                <div class="p-2 inline" th:if="${productos2 == null or productos2.empty}">
+                    <span>[[#{lista.vacia}]]</span>
+                </div>
+            </div>
+
+        </section>
+        
+        
+        
+        <section th:fragment="listadoProductosLista" id="productos" >
+            <div class="container">
+                <div class="row row-cols-2">
+                    <h2 clas="inline">Perfumes</h2>
+                    
+                </div>
+
+                <div class="row row-cols-5 justify-content-center">
+                    <div class="card m-1" th:each="p : ${productos}">
+                            <figure>
+                                <img th:src="${p.imagen}" 
+                                     class="card-img-top" 
+                                     height="200" alt="alt"/>
+                                <figcaption>
+                                    ₡[[${p.precio}]] ([[${p.cantidad}]])
+                                </figcaption>
+                            </figure>
+                            <form >
+                                <input type="hidden" name="idProducto" th:value="${p.idProducto}" />
+                                <input type="hidden" name="cantidad" th:value="${p.cantidad}" />
+                                <button class="btn btn-light" id="addCar" name="addCar" type="button" onclick="addCard(this.form)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </form>
+                            <div class="card-header">
+                                <h4>[[${p.descripcion}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>[[${p.nombre}]]</p>
+                            </div>
+                    </div>
+                </div>
+                <div class="p-2 inline" th:if="${productos2 == null or productos2.empty}">
+                    <span>[[#{lista.vacia}]]</span>
+                </div>
+            </div>
+
+        </section>
+        
+
     </body>
 </html>

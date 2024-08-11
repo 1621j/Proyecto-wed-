@@ -1,7 +1,6 @@
 
 /*
 tablas:
-
 -Categoria(id_categoria(PK),descripcion,ruta_imagen)
 -Producto(id_producto(PK),id_categoria(FK),descripcion,genero,precio,cantidad,talla,ruta_imagen)
 -Usuario(id_usuario(PK),username,password,nombre,apellidos,correo,telefono,direccion)
@@ -91,4 +90,3 @@ create table rol (
 
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
-
