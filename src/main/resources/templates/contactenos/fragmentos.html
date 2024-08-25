@@ -1,0 +1,55 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla::head}">
+        <title>CharlieShop</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+
+        <!-- 1 Fragmento Mapa Google -->
+        <section th:fragment="mapaUbicacion" id="map" class="mt-5">
+            <div class="card w-50 p-3 mx-auto ">
+                <div class="card-body">
+                    <h4 class="card-title text-center fw-bold ">Tienda Principal</h4>
+                </div>
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d245.57607563910358!2d-84.11674657464289!3d9.998908710228823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scr!4v1724465199493!5m2!1ses-419!2scr" width="300" height="300" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento Iconos Redes Sociales -->
+        <section th:fragment="redesSociales" id="contacto" class="mt-5">
+            <div class="container">
+                <div class="buttons" style="width: fit-content; margin: 0 auto;">
+                    <a href="https://www.facebook.com/share/BVkrCjNBqcL6NgJn/?mibextid=qi2Omg" target="_blank" class="btn btn-primary btn-block" 
+                       style="text-decoration: none; font-size: 40px; width: 80px; height: 80px;
+                       line-height: 65px; text-align: center; background: #02020a;
+                       color: #f1f1f1; border-radius: 50%; box-shadow: 2px 2px 5px
+                       rgba(0, 0, 0, .5); transition: all .4s ease-in-out; border: none">
+                        <i class="fab fa-facebook" style="text-align: center;"></i>
+                    </a>
+                    <a href="https://www.instagram.com/eutopia_cr/?igsh=Y3l3aXc5OG9lcWZ6&utm_source=qr" target="_blank" class="btn btn-primary btn-block" 
+                       style="text-decoration: none; font-size: 40px; width: 80px; height: 80px;
+                       line-height: 65px; text-align: center; background: #02020a;
+                       color: #f1f1f1; border-radius: 50%; box-shadow: 2px 2px 5px
+                       rgba(0, 0, 0, .5); transition: all .4s ease-in-out;  border: none">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/+50670511842" target="_blank" class="btn btn-primary btn-block" 
+                       style="text-decoration: none; font-size: 40px; width: 80px; height: 80px;
+                       line-height: 65px; text-align: center; background: #02020a;
+                       color: #f1f1f1; border-radius: 50%; box-shadow: 2px 2px 5px
+                       rgba(0, 0, 0, .5); transition: all .4s ease-in-out; border: none">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+
+    </body>
+</html>

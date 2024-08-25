@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+Esta es la primera pagina de este archivo HTML dinamica
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla::head}">
+        <title>CharlieShop</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <!--
+        Fragmento para la generacion de las categorias en caballeros
+        -->
+        <section th:fragment="caballerosCategoria" class="container my-4">
+            <h2 class="text-center">Categorías</h2>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <a href="@{/damas/blusas}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcaballeros%2Fcamisas%2Fcamisas-para-hombre-60010538-10215_2.jpg?alt=media&token=acae632b-aa82-4cec-b30c-e7786d14fdd1" alt="Camisas" class="img-fluid rounded-circle"/>
+                        <h4>CAMISAS</h4>
+                    </a>
+                </div>           
+                <div class="col-md-3">
+                    <a href="@{/damas/blusas}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcaballeros%2Fpantalones%2Ffull_image-4.jpg?alt=media&token=9b8c7b1e-2c7b-4bf3-9978-49c4697128eb" alt="Pantalones" class="img-fluid rounded-circle">
+                        <h4>PANTALONES</h4>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="@{/damas/blusas}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcaballeros%2Fchaquetas%2F495449-verde.jpg?alt=media&token=5003fe0a-12cf-42c3-af98-490388445b2b" alt="Chaquetas" class="img-fluid rounded-circle">
+                        <h4>CHAQUETAS</h4>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="@{/damas/blusas}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcaballeros%2Fbigsize%2FCamiseta-de-estilo-hawaiano-Big-Size-para-hombre-impresi-n-digital-regular-FIT-Buttons-ropa-camisas.jpg?alt=media&token=d22738dd-307c-4ee1-b30c-10d6774d532b" alt="BigSize" class="img-fluid rounded-circle">
+                        <h4>BIG SIZE</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section th:fragment="tarjetas" class="bg-light">
+            <div class="row row-cols-4">
+                <div class="card" th:each="p : ${productos}">
+                    <figure>
+                        <img th:src="${p.rutaImagen}" height="200"/>
+                        <figcaption class="d-flex justify-content-evenly">
+                            <div>
+                                ¢[[${p.precio}]] ([[${p.existencias}]])
+                            </div>
+                            <div>
+                                <form>
+                                    <input type="hidden" name="texto" th:value="${p.idProducto}"/>
+                                    <input type="hidden" name="texto" th:value="${p.existencias}"/>
+                                    <button class="btn btn-ligth" id="addCar" 
+                                            name="addCar" onclick="addCart(this.form)" 
+                                            type="button"><i class="fas fa-cart-plus"></i></button>
+                                </form>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <div class="card-header">
+                        <h4>[[${p.descripcion}]]</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>[[${p.detalle}]]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer th:fragment="footer" class="bg-info text-white mt-5 p-2">
+            <div class="col">
+                <p class="lead text-center">
+                    &COPY; [[#{plantilla.derechos}]] 
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>

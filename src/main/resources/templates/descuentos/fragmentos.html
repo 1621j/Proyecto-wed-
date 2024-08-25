@@ -1,192 +1,126 @@
-<!DOCTYPE html>
-<!--
-Esta es la primera pagina de este archivo HTML dinamica
--->
+
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla::head}">
-        <title>LifeTech Technologies</title>
+        <title>CharlieShop</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
-        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
-        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+        
+        
+        <!-- Fragmento de Logos de Marcas -->
+        <style>
+            .LogosMarcas{
+                height:150rem;
+                background: #F0F8FF;
+                margin-top: 10px;
+
+            }
+        </style>
+
+        <section th:fragment="LogosMarcas">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-3">   
-                        <button 
-                            type="button" 
-                            class="btn btn-primary btn-block" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#agregarCategoria">
-                            <i class="fas fa-plus"></i> [[#{categoria.agregar}]]
-                        </button>
+                <div class="row justify-content-center" style="margin-top: 70px">
+                    <div class="col-2">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/Perfumeria%2FChanelLogo1.png?alt=media&token=82eaa4e9-2b7c-4529-8720-606dc4598b06" class="rounded-circle" width="100px" height="100px">                  
+                    </div>
+                    <div class="col-2">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/Perfumeria%2FLacosteLogo.png?alt=media&token=94b38b84-41a4-4b2d-8d1d-62df1332289b" class="rounded-circle" width="100px" height="100px">                  
+                    </div>
+                    <div class="col-2">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/Perfumeria%2FCalvinKleinLogo.jpg?alt=media&token=0eab1789-ae7e-40fe-9c0f-60bfe86e9895" class="rounded-circle" width="100px" height="100px">                  
                     </div>
                 </div>
+                <hr style="margin-top: 50px">
             </div>
         </section>
 
-        <!-- 2 Fragmento para agregar categoria, es la ventana modal -->
-        <section th:fragment="agregarCategoria">
-            <div id="agregarCategoria" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
-                 aria-hidden="true">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">[[#{categoria.agregar}]]</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/categoria/guardar}" th:object="${categoria}"
-                              method="POST" class="was-validated" enctype="multipart/form-data">
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="descripcion">[[#{categoria.descripcion}]]</label>
-                                    <input type="text" class="form-control" name="descripcion" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="activo">[[#{categoria.activo}]]</label>
-                                    <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="imagen">[[#{categoria.rutaImagen}]]</label>
-                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
-                                    <img id="blah" src="#" alt="your image" height="200"/>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
-                            </div>
+
+        <!-- Fragmento de Tarjetas Descuentos Hombres -->
+        <section th:fragment="tarjetasDescuentosHombres" id="productos" >
+            <div class="container">
+                <div class="row row-cols-2">
+                    <h3 class="inline">Descuentos Hombres</h3>
+                    <div id="resultsBlock"></div>
+                </div>
+
+                <div class="row row-cols-5 justify-content-center" th:if="${descuentosHombres != null and !descuentosHombres.empty}">
+                    <div class="card m-3" th:each="d : ${descuentosHombres}">
+                        <figure>
+                            <img th:src="${d.rutaImagen}" 
+                                 class="card-img-top" 
+                                 height="200" alt="alt"/>
+                            <figcaption>
+                                ₡[[${d.precio}]] <br><br>
+                                [[${d.existencias}]] unidades disponibles
+                            </figcaption>
+                        </figure>
+                        <form>
+                            <input type="hidden" name="text" th:value="${d.idProducto}"/>
+                            <input type="hidden" name="text" th:value="${d.existencias}"/>
+                            <button class="btn btn-ligth" id="addCar" 
+                                    name="addCar" onclick="addCart(this.form)" 
+                                    type="button"><i class="fas fa-cart-plus"></i></button>
                         </form>
+                        <div class="card-header">
+                            <h4>[[${d.descripcion}]]</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>[[${d.detalle}]]</p>
+                        </div>
                     </div>
                 </div>
+                <div class="p-2 inline" th:if="${descuentosHombres == null or descuentosHombres.empty}">
+                    <span>[[#{lista.vacia}]]</span>
+                </div>
             </div>
-        </section>
 
-        <!-- 3 Sección principal para mostrar la informaccion de la entidad categoria -->
-        <section th:fragment="listadoCategorias" id="categorias">
+        </section>
+        
+        
+        <!-- Fragmento de Tarjetas Descuentos Hombres -->
+        <section th:fragment="tarjetasDescuentosMujeres" id="productos" >
             <div class="container">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>[[#{categoria.listado}]]</h4>
-                            </div>
-                            <div th:if="${categorias != null and !categorias.empty}">
-                                <table class="table table-striped table-hover">
-                                    <thead class="table-dark">
-                                        <tr><th>#</th>
-                                            <th>[[#{categoria.descripcion}]]</th>
-                                            <th>[[#{categoria.activo}]]</th>
-                                            <th></th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="categoria, contador : ${categorias}">
-                                            <td>[[${contador.count}]]</td>
-                                            <td>[[${categoria.descripcion}]]</td>
-                                            <td th:text="${categoria.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
-                                                   class="btn btn-danger">
-                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
-                                                <a th:href="@{/categoria/modificar/}+${categoria.idCategoria}"
-                                                   class="btn btn-success">
-                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="text-center p-2" th:if="${categorias == null or categorias.empty}">
-                                <span>[[#{lista.vacia}]]</span>
-                            </div>
+                <div class="row row-cols-2">
+                    <h3 class="inline">Descuentos Mujeres</h3>
+                    <div id="resultsBlock"></div>
+                </div>
+
+                <div class="row row-cols-5 justify-content-center" th:if="${descuentosMujeres != null and !descuentosMujeres.empty}">
+                    <div class="card m-3" th:each="dm : ${descuentosMujeres}">
+                        <figure>
+                            <img th:src="${dm.rutaImagen}" 
+                                 class="card-img-top" 
+                                 height="200" alt="alt"/>
+                            <figcaption>
+                                ₡[[${dm.precio}]] <br><br>
+                                [[${dm.existencias}]] unidades disponibles
+                            </figcaption>
+                        </figure>
+                        <form>
+                            <input type="hidden" name="text" th:value="${dm.idProducto}"/>
+                            <input type="hidden" name="text" th:value="${dm.existencias}"/>
+                            <button class="btn btn-ligth" id="addCar" 
+                                    name="addCar" onclick="addCart(this.form)" 
+                                    type="button"><i class="fas fa-cart-plus"></i></button>
+                        </form>
+                        <div class="card-header">
+                            <h4>[[${dm.descripcion}]]</h4>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card text-center bg-success text-white mb-3">
-                            <div class="card-body">
-                                <h3>[[#{categoria.total}]]</h3>
-                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalCategorias}]]</h4>
-                            </div>
+                        <div class="card-body">
+                            <p>[[${dm.detalle}]]</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- 4 Fragmento que se utiliza en la página modifca.html -->
-        <section th:fragment="editarCategoria">
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <form method="POST"
-                          th:action="@{/categoria/guardar}" 
-                          th:object="${categoria}"
-                          class="was-validated"                          
-                          enctype="multipart/form-data">
-                        <input type="hidden" name="idCategoria" th:field="*{idCategoria}"/>
-                        <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
-                        <section th:replace="~{categoria/fragmentos :: botonesEditar}"/>
-                        <div id=details>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h4>[[#{accion.actualizar}]]</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="mb-3">
-                                                    <label for="descripcion">[[#{categoria.descripcion}]]</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="activo">[[#{categoria.activo}]]</label>
-                                                    <input class="form-check-input" 
-                                                           type="checkbox" 
-                                                           name="activo" 
-                                                           id="activo"
-                                                           th:field="*{activo}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="imagen">[[#{categoria.rutaImagen}]]</label>
-                                                    <input class="form-control" type="file" name="imagenFile"
-                                                           onchange="readURL(this);" />
-                                                    <img id="blah" th:src="@{${categoria.rutaImagen}}" alt="your image" height="200"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </form>
+                <div class="p-2 inline" th:if="${descuentosMujeres == null or descuentosMujeres.empty}">
+                    <span>[[#{lista.vacia}]]</span>
                 </div>
             </div>
-        </section>
 
-        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
-        <section th:fragment="botonesEditar">
-            <div class="container py-4 mb-4 bg-light">
-                <div class="row">
-                    <div class="col-md-4 d-grid">
-                        <a th:href="@{/categoria/listado}" class="btn btn-primary">
-                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
-                        </a>
-                    </div>
-                    <div class="col-md-4 d-grid">                                
-                        <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
-                           class="btn btn-danger">
-                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
-                        </a>
-                    </div>
-                    <div class="col-md-4 d-grid">
-                        <button type="submit" class="btn btn-success">
-                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
-                        </button>
-                    </div>
-                </div>
-            </div>
         </section>
+        
+        
+       
     </body>
 </html>

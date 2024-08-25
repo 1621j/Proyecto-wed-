@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.charlieshop.Charlieshop.service.impl;
 
 import com.charlieshop.Charlieshop.dao.CategoriaDao;
@@ -8,40 +11,42 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//Se utiliza @Service para especificar que la clase sera un servicio.
 
+/**
+ *
+ * @author tutti
+ */
 
 @Service
-public class CategoriaServiceImpl implements CategoriaService {       //Implementa de CategoriaService (Hay que importar todos los metodos abstractos @Override).
+public class CategoriaServiceImpl implements CategoriaService{
     
-    @Autowired              //Se utiliza que el mismo objeto se cargue en memoria para todos los usuarios. No crea diferentes instancias del mismo. Para mejorar el rendimiento.
-    private CategoriaDao categoriaDao;
+    @Autowired
+    
+    private CategoriaDao categoriadao;
     
     @Override
-    public List<Categoria> getCategorias(boolean activos){
-        var lista = categoriaDao.findAll();
+    public List<Categoria> getCategorias(boolean activos) {
+        var lista = categoriadao.findAll();
         
-        if (activos) {     //Eliminar los inactivos
-            lista.removeIf(c -> !c.isActivo());      //
+        if (activos) { //eliminar inactivos
+            lista.removeIf(c -> !c.isActivo());
         }
-        
         return lista;
     }
 
     @Override
     public Categoria getCategoria(Categoria categoria) {
-        return categoriaDao.findById(categoria.getIdCategoria()).orElse(null);
+        return categoriadao.findById(categoria.getIdCategoria()).orElse(null);
     }
 
     @Override
     public void save(Categoria categoria) {
-        categoriaDao.save(categoria);
-        
+        categoriadao.save(categoria);
     }
 
     @Override
     public void delete(Categoria categoria) {
-        categoriaDao.delete(categoria);
+        categoriadao.delete(categoria);
     }
     
 }

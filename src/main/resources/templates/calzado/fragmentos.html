@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+Esta es la primera pagina de este archivo HTML dinamica
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla::head}">
+        <title>CharlieShop</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <!--
+        Fragmento para la generacion de las categorias en damas
+        -->
+        <section th:fragment="damasCategoria" class="container my-4">
+            <h2 class="text-center">DAMAS</h2>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <a href="@{/damas/casual}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcalzado%2FDisenosintitulo-2023-05-25T134245.697.jpg?alt=media&token=5ab5c8e2-3fc0-449b-adff-1bf0b5f5f0c8" alt="Casual" class="img-fluid rounded-circle"/>
+                        <h4>CASUAL</h4>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="@{/damas/formal}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcalzado%2F232801Y-05-05.jpg?alt=media&token=4e19155e-6224-4568-8662-7d8cebce700a" alt="Formal" class="img-fluid rounded-circle">
+                        <h4>FORMAL</h4>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="@{/damas/deportivo}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcalzado%2F177094-NAT-03.jpg?alt=media&token=985e53d8-ba2e-4481-b1e3-e97523cebf36" alt="Deportivo" class="img-fluid rounded-circle">
+                        <h4>DEPORTIVO</h4>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="@{/damas/sandalias}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcalzado%2F5454-101-26974-60298-04.jpg?alt=media&token=d1e0e914-25f3-48e9-88e9-0b616199556e" alt="Sandalias" class="img-fluid rounded-circle">
+                        <h4>SANDALIAS</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!--
+        Fragmento para la generacion de las categorias en caballeros
+        -->
+        <section th:fragment="caballerosCategoria" class="container my-4">
+            <h2 class="text-center">CABALLEROS</h2>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <a href="@{/caballeros/casual}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcalzado%2Fc44c121336da64a28686c65e4f0677bf.jpg?alt=media&token=6d569645-7952-4e7f-94d7-06039edb956e" alt="Casual" class="img-fluid rounded-circle"/>
+                        <h4>CASUAL</h4>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="@{/caballeros/formal}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcalzado%2F54ab76a67f207dae7e4254fd4b7022d8.jpg?alt=media&token=1b57f3d5-7069-449b-97c6-8d3d286ca4d4" alt="Formal" class="img-fluid rounded-circle">
+                        <h4>FORMAL</h4>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="@{/caballeros/deportivo}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcalzado%2FMens-Casual-Sneakers-Non-Slip-Sports-Shoes-ORTOREX-1.jpg?alt=media&token=4b8a63a5-ee15-47f4-bc20-afe189dfcfe0" alt="Deportivo" class="img-fluid rounded-circle">
+                        <h4>DEPORTIVO</h4>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="@{/caballeros/sandalias}" class="btn btn-link" style="text-decoration: none; color: black;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/charlie-shop-4a342.appspot.com/o/charlieshop%2Fcalzado%2FMens-Genuine-Leather-Slippers-Summer-Cross-Sandals-ORTOREX-1.jpg?alt=media&token=d4a3ecca-29b5-425c-93fd-48316006cd85" alt="Sandalias" class="img-fluid rounded-circle">
+                        <h4>SANDALIAS</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section th:fragment="tarjetas" class="bg-light">
+            <div class="row row-cols-4">
+                <div class="card" th:each="p : ${productos}">
+                    <figure>
+                        <img th:src="${p.rutaImagen}" height="200"/>
+                        <figcaption class="d-flex justify-content-evenly">
+                            <div>
+                                ¢[[${p.precio}]] ([[${p.existencias}]])
+                            </div>
+                            <div>
+                                <form>
+                                    <input type="hidden" name="texto" th:value="${p.idProducto}"/>
+                                    <input type="hidden" name="texto" th:value="${p.existencias}"/>
+                                    <button class="btn btn-ligth" id="addCar" 
+                                            name="addCar" onclick="addCart(this.form)" 
+                                            type="button"><i class="fas fa-cart-plus"></i></button>
+                                </form>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <div class="card-header">
+                        <h4>[[${p.descripcion}]]</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>[[${p.detalle}]]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer th:fragment="footer" class="bg-info text-white mt-5 p-2">
+            <div class="col">
+                <p class="lead text-center">
+                    &COPY; [[#{plantilla.derechos}]] 
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
+<!--
+Esta es la primera pagina de este archivo HTML dinamica
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{layout/plantilla::head}">
-        <title>LifeTech Technologies</title>
+    <head th:replace="~{layout/plantilla2::head}">
+        <title>CharlieShop</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
-        <header th:replace="~{layout/plantilla :: header}"></header>
+        <header th:replace="~{layout/plantilla2::header}"/>
+        <section th:replace="~{contactenos/fragmentos :: mapaUbicacion}"/> 
+        <section th:replace="~{contactenos/fragmentos :: redesSociales}"/> 
+        <br/>
+        <br/>
 
-        <!-- Sección principal sobre nosotros -->
-        <section th:replace="~{sobrenosotros/fragmentos :: sobre}"></section>
-
-        <!-- Sección Contáctenos -->
-        <section th:replace="~{contactenos/contactenos :: section}"></section>
-
-        <footer th:replace="~{layout/plantilla :: footer}"></footer>
+        <footer th:replace="~{layout/plantilla2::footer}"/>
     </body>
 </html>

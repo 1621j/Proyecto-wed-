@@ -3,18 +3,19 @@
 Esta es la primera pagina de este archivo HTML dinamica
 -->
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{layout/plantilla::head}">
-        <title>LifeTech Technologies</title>
+    <head th:replace="~{layout/plantilla2::head}">
+        <title>CharlieShop</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
-        <header th:replace="~{layout/plantilla::header}"/>
-        
-        <section th:replace="~{categoria/fragmentos::botonesAgregar}"/>
-        <section th:replace="~{categoria/fragmentos::agregarCategoria}"/>
-        <section th:replace="~{categoria/fragmentos::listadoCategorias}"/>
-        
-        <footer th:replace="~{layout/plantilla::footer}"/>
+        <header th:replace="~{layout/plantilla2::header}"/>
+
+        <section th:replace="~{descuentos/fragmentos :: tarjetasDescuentosHombres}"/> 
+        <hr/>
+       <section th:replace="~{descuentos/fragmentos :: tarjetasDescuentosMujeres}"/> 
+
+        <footer th:replace="~{layout/plantilla2::footer}"/>
     </body>
 </html>

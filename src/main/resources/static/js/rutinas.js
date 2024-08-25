@@ -1,7 +1,3 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/javascript.js to edit this template
- */
 
 function readURL(input){
     if (input.files && input.files[0]){
@@ -11,5 +7,16 @@ function readURL(input){
         };
         
         reader.readAsDataURL(input.files[0]);
+    }
+}
+
+//La siguiente función, agrega en el carrito de compras un producto
+//En la variable de sesión items, hace un llamado Ajax
+function addCart(formulario) {
+    var idProducto = formulario.elements[0].value;
+    var existencias = formulario.elements[1].value;
+    if (existencias > 0) {
+        var url = "/carrito/agregar/" + idProducto;
+        $("#resultsBlock").load(url);
     }
 }
